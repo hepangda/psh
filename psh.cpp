@@ -17,18 +17,20 @@
 #include<readline/readline.h>
 #include<readline/history.h>
 #include<cstdlib>
-
+#include<signal.h>
 extern std::map<std::string, std::function<int(command_t)> > shell_commands;
-char **envir;
 
 int main(int argc, char *argv[], char **envp) {
-    envir = envp;   //保存shell获得的环境变量，便于传递给子进程
-
     //构建内建命令与实现函数的映射
     shell_commands["exit"] = shellfunc_exit;
     shell_commands["logout"] = shellfunc_logout;
     shell_commands["cd"] = shellfunc_cd;
 
+    //阻断SIGINT SIGQUIT SIGSTOP SIGTSTP
+    signal(SIGINT, SIG_IGN);
+    signal(SIGQUIT, SIG_IGN);
+    signal(SIGSTOP, SIG_IGN);
+    signal(SIGTSTP, SIG_IGN);
     while (true) {
         std::string st = readline(get_tip().c_str());   //获得用户输入的内容
         //若用户输入的不是全空格，则将这条命令保存在历史记录中。
@@ -39,12 +41,12 @@ int main(int argc, char *argv[], char **envp) {
             add_history(st.c_str());
 
         //解析命令
-        command_t cmd = prase_command(st);
+        command_t cmd = parse_command(st);
 
         //若命令是管道，则分别执行两条管道命令
         if (cmd.is_pipe) {
-            command_t pipe1 = prase_command(cmd.pipe_prompt[0]);
-            command_t pipe2 = prase_command(cmd.pipe_prompt[1]);
+            command_t pipe1 = parse_command(cmd.pipe_prompt[0]);
+            command_t pipe2 = parse_command(cmd.pipe_prompt[1]);
             if (exec_command(pipe1) != 0)   //若管道的第一条命令就是错误的，不再执行第二条命令
                 continue;
             exec_command(pipe2);
