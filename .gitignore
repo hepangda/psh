@@ -14,3 +14,5 @@
 *.la
 *.a
 *.lib
+.xmake/
+build/
