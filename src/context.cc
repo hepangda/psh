@@ -51,8 +51,7 @@ std::shared_ptr<Command> Context::findCommand(Expression& cmd) {
         }
     }
 
-    GenericCommand generic_command;
-    return std::make_shared<GenericCommand>(generic_command);
+    return std::make_shared<GenericCommand>();
 }
 
 }  // namespace psh
