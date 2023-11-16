@@ -16,3 +16,4 @@
 *.lib
 .xmake/
 build/
+.vscode/

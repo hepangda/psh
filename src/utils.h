@@ -5,10 +5,16 @@
 // For full terms see the included LICENSE and COPYLEFT file.
 #pragma once
 
-#include <unistd.h>
-
 #include <string>
 
 #include "expression.h"
-#include "utils.h"
-#define DEBUG_LOG(str, ...) printf("Function: %s, Line: %d," str "\n", __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
+namespace psh {
+
+bool isBlankString(const std::string &s);
+std::string getPrompt();
+
+int psh_error(int error);
+std::vector<std::string> splitString(std::string_view strv, char sep);
+
+}  // namespace psh
