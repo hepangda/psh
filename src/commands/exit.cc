@@ -9,6 +9,8 @@ namespace psh {
 
 [[noreturn]] int ExitCommand::execute(Context &ctx, Expression &cmd) { exit(0); }
 
-bool ExitCommand::match(std::string_view patterns) { return patterns == "exit" || patterns == "logout"; }
+bool ExitCommand::match(std::string_view patterns) {
+  return patterns == "exit" || patterns == "logout";
+}
 
 }  // namespace psh

@@ -11,4 +11,5 @@
 
 #include "expression.h"
 #include "utils.h"
-#define DEBUG_LOG(str, ...) printf("Function: %s, Line: %d," str "\n", __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DEBUG_LOG(str, ...) \
+  printf("Function: %s, Line: %d," str "\n", __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

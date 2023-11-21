@@ -9,9 +9,9 @@
 namespace psh {
 
 class ExitCommand : public Command {
-   public:
-    [[noreturn]] virtual int execute(Context &ctx, Expression &cmd) override;
-    virtual bool match(std::string_view patterns) override;
+ public:
+  [[noreturn]] virtual int execute(Context &ctx, Expression &cmd) override;
+  virtual bool match(std::string_view patterns) override;
 };
 
 }  // namespace psh

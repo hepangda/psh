@@ -7,15 +7,15 @@
 
 #include <string_view>
 
-#include "expression.h"
 #include "context.h"
+#include "expression.h"
 
 namespace psh {
 
 class Command {
-   public:
-    virtual int execute(Context &ctx, Expression &cmd) = 0;
-    virtual bool match(std::string_view patterns) = 0;
+ public:
+  virtual int execute(Context &ctx, Expression &cmd) = 0;
+  virtual bool match(std::string_view patterns) = 0;
 };
 
 }  // namespace psh

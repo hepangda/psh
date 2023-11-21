@@ -10,14 +10,14 @@
 namespace psh {
 
 int CdCommand::execute(Context &ctx, Expression &cmd) {
-    const std::string &dir = (cmd.arguments.size() <= 1) ? "." : cmd.arguments.at(1);
+  const std::string &dir = (cmd.arguments.size() <= 1) ? "." : cmd.arguments.at(1);
 
-    // Change the shell's working directory, if it fails, output the reason.
-    if (chdir(dir.c_str()) != 0) {
-        perror("psh");
-        return -1;
-    }
-    return 0;
+  // Change the shell's working directory, if it fails, output the reason.
+  if (chdir(dir.c_str()) != 0) {
+    perror("psh");
+    return -1;
+  }
+  return 0;
 }
 
 bool CdCommand::match(std::string_view patterns) { return patterns == "cd"; }

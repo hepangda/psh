@@ -12,27 +12,27 @@ namespace psh {
 
 namespace details {
 struct SearchResult {
-    enum class Type {
-        Found,
-        FolderNotFound,
-        FileNotFound,
-    };
+  enum class Type {
+    Found,
+    FolderNotFound,
+    FileNotFound,
+  };
 
-    Type type;
-    std::string path;
+  Type type;
+  std::string path;
 
-    SearchResult(Type type) : type(type) {}
-    SearchResult(std::string path) : type(Type::Found), path(path) {}
+  SearchResult(Type type) : type(type) {}
+  SearchResult(std::string path) : type(Type::Found), path(path) {}
 };
 }  // namespace details
 
 class GenericCommand : public Command {
-   public:
-    virtual int execute(Context &ctx, Expression &cmd) override;
-    virtual bool match(std::string_view patterns) override;
+ public:
+  virtual int execute(Context &ctx, Expression &cmd) override;
+  virtual bool match(std::string_view patterns) override;
 
-   private:
-    details::SearchResult findExecfile(Context &ctx, std::string_view execfile);
+ private:
+  details::SearchResult findExecfile(Context &ctx, std::string_view execfile);
 };
 
 }  // namespace psh
